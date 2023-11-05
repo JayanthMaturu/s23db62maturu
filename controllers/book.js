@@ -1,8 +1,17 @@
 var Book = require('../models/bookSchema');
+
 // List of all Books
-exports.book_list = function(req, res) {
-res.send('NOT IMPLEMENTED: Book list');
+exports.book_list = async function (req, res) {
+    try {
+        theBooks = await Book.find();
+        res.send(theBooks);
+    }
+    catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    }
 };
+
 // for a specific Book.
 exports.book_detail = function(req, res) {
 res.send('NOT IMPLEMENTED: Book detail: ' + req.params.id);
