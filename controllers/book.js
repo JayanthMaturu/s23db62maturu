@@ -47,8 +47,15 @@ exports.book_view_all_Page = async function(req, res) {
 };
 
 // for a specific Book.
-exports.book_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: Book detail: ' + req.params.id);
+exports.book_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await Book.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
 };
 
 // Handle Book delete form on DELETE.
