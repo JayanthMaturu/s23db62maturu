@@ -1,0 +1,43 @@
+extends layout
+block content
+    h1= title
+
+    if (toShow == null)
+        h2 No instance to display details
+    else
+        - let bookid = toShow._id
+        - let book_name = toShow.book_name
+        - let book_author = toShow.book_author
+        - let book_cost = toShow.book_cost
+            div.row(class='mb-2')
+                div.mr-1 ID is
+                div #{bookid}
+        - let actionid = "/resource/books/" + bookid
+    form(id='BookForm' action=actionid method="PUT")
+        div.form-group
+            label.bookAttr(for='book_name') Book name
+            input#book_name(type='text' name='book_name')
+        div.form-group
+            label.bookAttr(for='book_author') Book author
+            input#book_author(type='text' name='book_author')
+        div.form-group
+            label.bookAttr(for='book_cost') Book cost
+            input#book_cost(type='number' name='book_cost')
+            input(type="submit")
+        script.
+            document.forms['BookForm'].addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    // TODO do something here to show user that form is being submitted
+                    fetch(event.target.action, {
+                        method: 'PUT',
+                        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+                    }).then((resp) => {
+                        return resp.text(); // or resp.text() or whatever the server sends
+                    }).then((body) => {
+                        alert("Save succeded")
+                        // TODO handle body
+                    }).catch((error) => {
+                        // TODO handle error
+                        alert("Save failed " + error )
+                    });
+                });

@@ -11,4 +11,7 @@ router.get('/detail', book_controlers.book_view_one_Page);
 /* GET create costume page */
 router.get('/create', book_controlers.book_create_Page);
 
+/* GET create update page */
+router.get('/update', book_controlers.book_update_Page);
+
 module.exports = router;
