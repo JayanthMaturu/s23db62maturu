@@ -32,20 +32,6 @@ exports.book_create_post = async function(req, res) {
     }
 };
 
-
-// VIEWS
-// Handle a show all view
-exports.book_view_all_Page = async function(req, res) {
-    try{
-    theBooks = await Book.find();
-    res.render('books', { title: 'Book Search Results', results: theBooks });
-    }
-    catch(err){
-    res.status(500);
-    res.send(`{"error": ${err}}`);
-    }
-};
-
 // for a specific Book.
 exports.book_detail = async function(req, res) {
     console.log("detail" + req.params.id)
@@ -95,6 +81,20 @@ failed`);
  }
 };
 
+
+// VIEWS
+// Handle a show all view
+exports.book_view_all_Page = async function(req, res) {
+    try{
+    theBooks = await Book.find();
+    res.render('books', { title: 'Book Search Results', results: theBooks });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+};
+
 // Handle a show one view with id specified by query
 exports.book_view_one_Page = async function (req, res) {
     console.log("single view for id " + req.query.id)
@@ -106,5 +106,19 @@ exports.book_view_one_Page = async function (req, res) {
     catch (err) {
         res.status(500)
         res.send(`{'error': '${err}'}`);
+    }
+};
+
+// Handle building the view for creating a costume.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.book_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('bookcreate', { title: 'Book Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
     }
 };

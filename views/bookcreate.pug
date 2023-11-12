@@ -1,0 +1,31 @@
+extends layout
+block content
+    h1= title
+    form(id='BookForm' action="/resource/books" method="POST")
+        div.form-group
+            label.bookAttr(for='book_name') Book name
+            input#book_name(type='text' name='book_name')
+        div.form-group
+            label.bookAttr(for='book_author') Book author
+            input#book_author(type='text' name='book_author')
+        div.form-group
+            label.bookAttr(for='book_cost') Book cost
+            input#book_cost(type='number' name='book_cost')
+            input(type="submit")
+        script.
+            document.forms['BookForm'].addEventListener('submit', (event) => {
+                event.preventDefault();
+                // TODO do something here to show user that form is being submitted
+                fetch(event.target.action, {
+                    method: 'POST',
+                    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+                }).then((resp) => {
+                    return resp.json(); // or resp.text() or whatever the server sends
+                }).then((body) => {
+                    alert("Save succeded")
+                    // TODO handle body
+                }).catch((error) => {
+                    // TODO handle error
+                    alert("Save failed " + error )
+                });
+            });
