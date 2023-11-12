@@ -5,4 +5,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/',book_controlers.book_view_all_Page);
 
+/* GET detail book page */
+router.get('/detail', book_controlers.book_view_one_Page);
+
 module.exports = router;

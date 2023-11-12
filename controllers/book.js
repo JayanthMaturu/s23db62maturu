@@ -23,12 +23,12 @@ exports.book_create_post = async function(req, res) {
     document.book_author = req.body.book_author;
     document.book_cost = req.body.book_cost;
     try{
-    let result = await document.save();
-    res.send(result);
+        let result = await document.save();
+        res.send(result);
     }
     catch(err){
-    res.status(500);
-    res.send(`{"error": ${err}}`);
+        res.status(500);
+        res.send(`{"error": ${err}}`);
     }
 };
 
@@ -93,4 +93,18 @@ ${JSON.stringify(req.body)}`)
  res.send(`{"error": ${err}: Update for id ${req.params.id}
 failed`);
  }
+};
+
+// Handle a show one view with id specified by query
+exports.book_view_one_Page = async function (req, res) {
+    console.log("single view for id " + req.query.id)
+    try {
+        let result = await Book.findById(req.query.id)
+        res.render('bookdetail',
+            { title: 'Book Detail', toShow: result });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
 };
