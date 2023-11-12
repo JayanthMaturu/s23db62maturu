@@ -59,9 +59,18 @@ exports.book_detail = async function(req, res) {
 };
 
 // Handle Book delete form on DELETE.
-exports.book_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: Book delete DELETE ' + req.params.id);
-};
+exports.book_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Book.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
+
 // Handle Book update form on PUT.
 
 exports.book_update_put = async function(req, res) {
@@ -72,8 +81,10 @@ ${JSON.stringify(req.body)}`)
     // Do updates of properties
     if(req.body.book_name)
         toUpdate.book_name = req.body.book_name;
-    if(req.body.book_author) toUpdate.book_author = req.body.book_author;
-    if(req.body.book_cost) toUpdate.book_cost = req.body.book_cost;
+    if(req.body.book_author) 
+        toUpdate.book_author = req.body.book_author;
+    if(req.body.book_cost) 
+        toUpdate.book_cost = req.body.book_cost;
     let result = await toUpdate.save();
     console.log("Sucess " + result)
     res.send(result)
