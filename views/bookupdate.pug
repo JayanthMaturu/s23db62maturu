@@ -16,13 +16,13 @@ block content
     form(id='BookForm' action=actionid method="PUT")
         div.form-group
             label.bookAttr(for='book_name') Book name
-            input#book_name(type='text' name='book_name')
+            input#book_name(type='text' name='book_name' value= book_name)
         div.form-group
             label.bookAttr(for='book_author') Book author
-            input#book_author(type='text' name='book_author')
+            input#book_author(type='text' name='book_author' value= book_author)
         div.form-group
             label.bookAttr(for='book_cost') Book cost
-            input#book_cost(type='number' name='book_cost')
+            input#book_cost(type='number' name='book_cost' value= book_cost)
             input(type="submit")
         script.
             document.forms['BookForm'].addEventListener('submit', (event) => {

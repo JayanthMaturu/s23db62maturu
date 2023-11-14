@@ -14,4 +14,7 @@ router.get('/create', book_controlers.book_create_Page);
 /* GET create update page */
 router.get('/update', book_controlers.book_update_Page);
 
+/* GET delete costume page */
+router.get('/delete', book_controlers.book_delete_Page);
+
 module.exports = router;
