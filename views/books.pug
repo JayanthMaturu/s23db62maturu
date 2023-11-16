@@ -21,12 +21,12 @@ block content
       },                   
     ]
   div(class= "container-fluid")
-    div(class = "row")
+    div(class = "row m-1")
       each item,index in results
-        div(class= "col-sm-2", onclick=`buy(${index})` ) #{item.book_name}
-        div(class= "col-sm-2", onclick=`buy(${index})`) #{item.book_author}
-        div(class= "col-sm-2", onclick=`buy(${index})`) #{item.book_cost}
+       - let destination = `dispatch(\"/books/update?id=${item._id}\")`
+       div(class="row-sm-2", class="m-1") Item #{item.book_name}(#{item.book_author}) is #{item.book_cost}
+       button.btn( class="btn-primary m1-1", onclick= destination) Update
   script.
-    function buy(itemNum){
-      alert(`You purchased item ${itemNum+1}`)
+    function dispatch(itemNum){
+      window.location.href=path
     }
