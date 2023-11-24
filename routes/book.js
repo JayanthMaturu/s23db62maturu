@@ -1,6 +1,13 @@
 var express = require('express');
 const book_controlers= require('../controllers/book');
 var router = express.Router();
+const secured = (req, res, next) => {
+    if (req.user) {
+        return next();
+    }
+    req.session.returnTo = req.originalUrl;
+    res.redirect("/login");
+}
 
 /* GET home page. */
 router.get('/',book_controlers.book_view_all_Page);
