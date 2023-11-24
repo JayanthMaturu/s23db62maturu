@@ -1,18 +1,27 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title} pug
-  button(type= "button", class= "btn btn-secondary" , onclick= "goFaster()") Press Me
-  div(id="faster") Increase the speed
-
-    script.
-      var mph=20
-      var change=1
-      function goFaster(){
-        mph=mph+change;
-        change++;
-        document.getElementById("faster").innerHTML = 'MPH '+ mph + ' with change '+change+'.';
-      }
-
-  a(href='/book') Click here to search for book
+  //- h1= title
+  //- p Welcome to #{title} pug
+  //- button(type= "button", class= "btn btn-secondary" , onclick= "goFaster()") Press Me
+  //- div(id="faster") Increase the speed
+  //- 
+  //-   script.
+  //-     var mph=20
+  //-     var change=1
+  //-     function goFaster(){
+  //-       mph=mph+change;
+  //-       change++;
+  //-       document.getElementById("faster").innerHTML = 'MPH '+ mph + ' with change '+change+'.';
+  //-     }
+  //- 
+  //- a(href='/book') Click here to search for book
+  if (!user)
+    a(href="/login") Login
+    br
+    a(href="/register") Register
+  if (user)
+    p You are currently logged in as #{user.username}
+    a(href="/books") Take me to books
+    br
+    a(href="/logout") Logout
