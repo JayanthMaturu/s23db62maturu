@@ -4,8 +4,8 @@ block content
   h1= title
   - let des = `dispatch(\"/books/create\")`
   button.btn( class="btn-secondary m-1" onclick= des) Create
-  -
-    let results = [
+  - let result = results
+   //  let results = [
       {
         "book_name": "HarryPotter",
         "book_author": "JKRouling",
@@ -24,7 +24,7 @@ block content
     ]
   div(class= "container-fluid")
     div(class = "col m-1")
-      each item,index in results
+      each item,index in result
        - let destination = `dispatch(\"/books/update?id=${item._id}\")`
        - let destination1 = `dispatch(\"/books/detail?id=${item._id}\")`
        - let destination2 = `dispatch(\"/books/delete?id=${item._id}\")`
